@@ -1,4 +1,6 @@
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 /*--------------------------------------------------------------------*
 * Editor.java                            		    	         	  *
@@ -25,34 +27,36 @@ public class Editor implements IEditor {
 	// Class Variable Definitions                                    //
 	//---------------------------------------------------------------//
 	
-	//Line count for the document
-	int editLineCount;
+	/* The length in textual lines the document has. */
+	int documentLineCount;
 	
-	//Current line that the command applies to
-	int currentLineNumber;
+	/* linked list containing each line of the document. */
+	LinkedList <String> textData;	
 	
-	//Contains the current line content
-	String currentLineContent;
-	
-	/* Determines if were actively displaying a document. */
-	boolean activeEditMode = false;
-	
-	/* Determines if were currently entering a command. */
-	boolean activeCommandMode = true;
-	
-	//linked list for each line of the document
-	LinkedList <String> textData = new LinkedList ();	
-	
+	/* Current line that the commands are operating on. */
+    ListIterator<String> CurrentLine;
 	
 	//---------------------------------------------------------------//	
 	// Class Constructors                                            //
 	//---------------------------------------------------------------//
 	
 	
+	/*****************************************************************
+	 * @Description - The default constructor for the command line 
+	 * text editor. This configures and sets up the linked list for 
+	 * the editor.
+	 *
+	 * @Returns - (N/A)
+	 *
+	 ****************************************************************/
 	public Editor () {
+		
+		// Build the linked list.
+		textData = new LinkedList<String> ();
+		CurrentLine = textData.listIterator();
 
-		setCurrentLine(0);
-		setEditLineCount(0);
+		// Configure the file editor.
+		documentLineCount = 0;
 		
 	}
 	
@@ -60,7 +64,6 @@ public class Editor implements IEditor {
 	// Function Definitions					     					//
 	//--------------------------------------------------------------// 
 	
-
 	/*****************************************************************
 	 * @Description - A method used to execute input commands entered
 	 * by the user. It also will display command input errors if
@@ -73,137 +76,123 @@ public class Editor implements IEditor {
 	 *
 	 ****************************************************************/
 	@Override
-	public boolean processCommand(String input) {
-
-		boolean validCommand = true;
-		//create a editor command instance
-		Command editorCommand = new Command();
-
-		// Determine the
-			if((input.length()>1 && input.charAt(1) == ' ') || input.length() == 1){
-			switch(command){
+	public void processCommand(String input) {
+			
+		// Error check that the command is valid.
+		if((input.length()>1 && input.charAt(1) == ' ') || 
+												input.length() == 1) {
+			
+			// Go through and match a command to run.
+			switch( input.charAt(1) ){
+			
+				// Insert before current line.
 				case 'b':
-					valid = true;
-					break;
+				
+				break;
+				
+				// Insert after current line.
 				case 'i':
-					valid = true;
-					break;
+			
+				break;
+				
+				// Move current line down a position.
 				case 'm':
-					valid = true;
-					break;
+					
+				break;
+			
+				// Move current line up 1 position.
 				case 'u':
-					valid = true;
-					break;
+			
+				break;
+			
+				// Remove the current line.
 				case 'r':
-					valid = true;
-					break;
+					
+				break;
+			
+				// Display the project buffer.
 				case 'd':
-					valid = true;
-					break;
+					
+				break;
+				
+				// Clear and remove all lines in buffer.
 				case 'c':
-					valid = true;
-					break;
+					
+				break;
+				
+				// Save file contents to a file directory.
 				case 's':
-					valid = true;
-					break;
+					
+				break;
+			
+				// Load a files contents from a directory.
 				case 'l':
-					valid = true;
-					break;
+					
+				break;
+				
+				// Display list of commands.
 				case 'h':
-					valid = true;
-					break;
+					
+				break;
+			
+				// Exit the editor.
 				case 'x':
-					valid = true;
-					break;
-				//no valid command char entered	
+					
+				break;
+				
+				// Invalid command entered.
 				default:
-					System.out.println( "Oops, An invalid command was entered." );
-
-					break;
+					System.out.println( "!!!> Oops, An invalid command"
+							+ " was entered.Type h for a list of "
+							+ "commands." );
+				break;
 			}
+			
+			// Update the list size.
+			documentLineCount = textData.size();
+			
 		}
-		else
-			System.out.println("INPUT ERROR");
 		
-		return validCommand;
+		// Nothing was entered into the buffer.
+		else
+			System.out.println("!!!> Oops, nothing was entered in for "
+					+ "a command. Type h for a list of commands.");
+		
 	}
 	
 
-	
 	/*****************************************************************
-	 * @Description - A method utilized to return the current text 
-	 * line that the user is currently editing.
+	 * @Description - A method utilized to return the total number of 
+	 * lines in the document being edited.
 	 *
-	 * @Returns - The text of the line the user is currently editing 
-	 * as a String.
+	 * @param (N/A)
+	 *
+	 * @Returns - The total number of lines in the document (Int).
 	 *
 	 ****************************************************************/
 	@Override
-	public String getCurrentLine() {
-		// TODO Auto-generated method stub
-		return null;
+	public int getDocumentLineCount() {
+		
+		return documentLineCount;
+		
 	}
-
+	
 	
 	/*****************************************************************
-	 * @Description - A method called to draw the linked list of text
-	 * object lines of the document.
+	 * @Description - A method utilized to clear the console of all 
+	 * visible content on the screen.
 	 *
 	 * @Returns - (N/A)
 	 *
 	 ****************************************************************/
-	public void drawDocument() {
-		
-		clearConsole();
-		
-		for(int i = 0; i<editLineCount;i++){
-			System.out.println();
-		}
-		
-	}
-	
-	/*****************************************************************
-	 * @Description - A method utilized to return a given line 
-	 * number's textual information.
-	 *
-	 * @param The line number to pull the text value from.
-	 *
-	 * @Returns - The text of the line the user is currently editing 
-	 * as a String.
-	 *
-	 ****************************************************************/
-	
-	@Override
-	public String getLine(int lineNbr) {
-		// TODO Auto-generated method stub
-		return currentLineContent;
-	}
-	
-	public int getEditLineCount() {
-		return editLineCount;
-	}
-
-	public void setEditLineCount(int editLineCount) {
-		this.editLineCount = editLineCount;
-	}
-
-	public void setCurrentLine(int currentLine) {
-		this.currentLineNumber = currentLine;
-	}
-	//--------------------------------------------------------------// 
-
-	@Override
-	public int getDocumentLineCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
 	public final static void clearConsole()
 	{
-	    //Push old editor out of visible site on terminal
+	    //Push old editor out of visible site on terminal.
 	    for(int i=0;i<30;i++){
 	    	System.out.println();
 	    }
 	}
+	
+	//--------------------------------------------------------------// 
 
 }

@@ -23,13 +23,7 @@ public interface IEditor {
 	//--------------------------------------------------------------//  
  
 	/* Processes the given editor command. */ 
-	boolean processCommand(String command); 
- 
-	/* Returns the line at the given line number. */ 
-	String getLine(int lineNbr); 
- 
-	/* Returns the current line. */ 
-	String getCurrentLine(); 
+	void processCommand(String command); 
 	
 	/* Returns the number of lines in document. */ 
 	int getDocumentLineCount(); 

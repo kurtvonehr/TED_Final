@@ -31,8 +31,8 @@ public class EditorRuntime {
 	// Filename of text file
 	static String filename = null;
 	
-    protected static BufferedReader inputReader = new BufferedReader(new InputStreamReader 
-    											(System.in) );
+    protected static BufferedReader inputReader = new BufferedReader (
+    		new InputStreamReader (System.in) );
     
 	/* The editor object used for processing commands. 	  */
 	static Editor edit;
@@ -66,7 +66,6 @@ public class EditorRuntime {
 		{
 			if(!errorMessage){
 				// Draw the document.
-				edit.drawDocument();
 				System.out.print("\n=> ");
 			}
 			
@@ -74,19 +73,13 @@ public class EditorRuntime {
 			try 
 			{
 				String input =  inputReader.readLine();
-				
-				if(input != null)
-					if(!edit.processCommand(input)){
-						errorMessage = true;
-					}
-					else
-						errorMessage = false;
+				edit.processCommand(input);
 			}
 			
 			catch (IOException e) {
 				
 				//TODO TELL THERE WAS AN INPUT ERROR.
-				
+				System.out.println ("!!!> ");
 				e.printStackTrace();
 			}
 		}
