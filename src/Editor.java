@@ -118,52 +118,62 @@ public class Editor implements IEditor {
 				
 				// Move current line down a position.
 				case 'm':
-					
+					command = new MoveIndicatorDown ();
+					command.executeCommand(input, CurrentLine);
 				break;
 			
 				// Move current line up 1 position.
 				case 'u':
-			
+					command = new MoveIndicatorUp ();
+					command.executeCommand(input, CurrentLine);
 				break;
 			
 				// Remove the current line.
 				case 'r':
-				
+					command = new RemoveCurrentLine ();
+					command.executeCommand(input, CurrentLine);
 				break;
 			
 				// Display the project buffer.
 				case 'd':
-					
+					command = new DisplayAllLines ();
+					command.executeCommand(input, CurrentLine);
 				break;
 				
 				// Clear and remove all lines in buffer.
 				case 'c':
-				
+					command = new ClearLines ();
+					command.executeCommand(input, CurrentLine);
 				break;
 				
 				// Save file contents to a file directory.
 				case 's':
-					
+					command = new SaveFile ();
+					command.executeCommand(input, CurrentLine);
 				break;
 			
 				// Load a files contents from a directory.
 				case 'l':
-					
+					command = new LoadFile ();
+					command.executeCommand(input, CurrentLine);
 				break;
 				
 				// Display list of commands.
 				case 'h':
-					
+					command = new Help ();
+					command.executeCommand(input, CurrentLine);
 				break;
 			
 				// Exit the editor.
 				case 'x':
-					
+					command = new Exit ();
+					command.executeCommand(input, CurrentLine);
 				break;
 				
 				// Insert after last line. 
 				case 'e':
-					
+					command = new AfterLast ();
+					command.executeCommand(input, CurrentLine);
 				break;
 				
 				// Invalid command entered.
