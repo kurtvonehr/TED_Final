@@ -7,7 +7,14 @@ public class ClearLines implements ICommand {
 
 	@Override
 	public boolean executeCommand(String command, ListIterator<String> currentData) {
-		// TODO Auto-generated method stub
+		
+		while(currentData.hasNext())
+			currentData.remove();
+		while(currentData.previousIndex() > 0)
+			currentData.remove();
+		currentData.previous();
+		currentData.remove();
+		
 		return false;
 	}
 

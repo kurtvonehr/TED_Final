@@ -7,7 +7,18 @@ public class RemoveCurrentLine implements ICommand {
 
 	@Override
 	public boolean executeCommand(String command, ListIterator<String> currentData) {
-		// TODO Auto-generated method stub
+		
+		if(currentData.hasNext()){
+			currentData.previous();
+			currentData.remove();
+			currentData.next();
+		}
+		else if(currentData.hasPrevious()){
+			currentData.previous();
+			currentData.remove();
+		}
+		
+		
 		return false;
 	}
 
