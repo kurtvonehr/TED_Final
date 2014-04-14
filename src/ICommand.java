@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 /*--------------------------------------------------------------------*
 * ICommand.java                            		    	         	  *
@@ -25,7 +26,7 @@ public interface ICommand {
 	//--------------------------------------------------------------// 
 	
 	/* Called to execute the command*/
-	public boolean executeCommand (String command, LinkedList currentData);
+	public boolean executeCommand (String command, ListIterator<String> currentData);
 	
 	/* This is called when the user asks for a command help list. */
 	public void printError ();

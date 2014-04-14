@@ -1,12 +1,14 @@
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 
 public class BeforeLine implements ICommand {
 
 
 	@Override
-	public boolean executeCommand(String command, LinkedList currentData) {
-		// TODO Auto-generated method stub
+	public boolean executeCommand(String command, ListIterator currentData) {
+		
+		
 		return false;
 	}
 

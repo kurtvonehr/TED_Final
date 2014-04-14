@@ -91,7 +91,7 @@ public class Editor implements IEditor {
 				// Insert before current line.
 				case 'b':
 				command = new BeforeLine();
-				
+				command.executeCommand(input, CurrentLine);
 				break;
 				
 				// Insert after current line.
