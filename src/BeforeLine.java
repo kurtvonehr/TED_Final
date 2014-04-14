@@ -1,12 +1,29 @@
-import java.util.LinkedList;
 import java.util.ListIterator;
+
+/*---------------------------------------------------------------------*
+ * BeforeLine.java                 		           		       		   *
+ *---------------------------------------------------------------------*
+ *   Description - A command class used to insert a line of content	   *
+ *   				before the current editing line.			  	   *
+ *---------------------------------------------------------------------*
+ * Project: Project 4 : TED	 	                                       *
+ * Author : McKim A. Jacob, Vonehr Kurt						           *
+ * Date Of Creation: 4 - 6 - 2014                                      *
+ *---------------------------------------------------------------------*
+ * ISSUES AND NOTES						      						   *
+ *---------------------------------------------------------------------*
+ *
+ *
+ *
+ *---------------------------------------------------------------------*/
 
 
 public class BeforeLine implements ICommand {
 
 
 	@Override
-	public boolean executeCommand(String command, ListIterator<String> currentData) {
+	public boolean executeCommand(String command, 
+										ListIterator<String> currentData) {
 		
 		String insertedText = command.substring(1,command.length());
 		if(currentData.hasPrevious()){
@@ -16,13 +33,9 @@ public class BeforeLine implements ICommand {
 		else
 			currentData.add(insertedText);
 		
-		return false;
-	}
-
-	@Override
-	public void printError() {
-		// TODO Auto-generated method stub
-
+		// Return that method completed.
+		return true;
+		
 	}
 
 	@Override

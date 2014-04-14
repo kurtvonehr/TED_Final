@@ -29,9 +29,6 @@ public interface ICommand {
 	public boolean executeCommand (String command, ListIterator<String> currentData);
 	
 	/* This is called when the user asks for a command help list. */
-	public void printError ();
-	
-	/* This is called when the user asks for a command help list. */
 	public void printCommandHelp ();
 	
 	//--------------------------------------------------------------// 

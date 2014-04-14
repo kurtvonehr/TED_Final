@@ -1,4 +1,3 @@
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -89,6 +88,9 @@ public class Editor implements IEditor {
 		/* The identifier received for the command to be executed. */
 		char commandID;
 		
+		/* Keeps track of document modifications for saving. */
+		boolean docChange = false;
+		
 		// --- Main Routine -------------------------------------//
 
 		// Error check that the command is valid.
@@ -105,7 +107,6 @@ public class Editor implements IEditor {
 			
 				// Insert before current line.
 				case 'b':
-				
 				command = new BeforeLine();
 				command.executeCommand(input, CurrentLine);
 				break;
@@ -149,7 +150,8 @@ public class Editor implements IEditor {
 				// Save file contents to a file directory.
 				case 's':
 					command = new SaveFile ();
-					command.executeCommand(input, CurrentLine);
+					docChange = command.executeCommand(input, 
+									CurrentLine) ? false : true;
 				break;
 			
 				// Load a files contents from a directory.
@@ -167,8 +169,25 @@ public class Editor implements IEditor {
 			
 				// Exit the editor.
 				case 'x':
-					command = new Exit ();
-					command.executeCommand(input, CurrentLine);
+					
+					// Check and see if the document has yet to be saved.
+					if (docChange)
+					{
+						System.out.println ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+						System.out.println ("  The document has yet to be saved."
+								+ "\n Would you like to save it before you exit?");
+						System.out.println ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+						
+						//TODO ADD USER PROMPT FOR RESULT
+						
+					}
+					
+					else
+					{
+						System.out.println("Good bye!");
+						System.exit(0);
+					}
+					
 				break;
 				
 				// Insert after last line. 
@@ -180,11 +199,18 @@ public class Editor implements IEditor {
 				// Invalid command entered.
 				default:
 					 error = true;
-					 System.out.println("Incorrect Input Format. \nShould be of form: [command] [data_entry]");
+					 System.out.println("Incorrect Input Format. "
+					 		+ "\nShould be of form: [command] [data_entry]");
 					 System.out.print("\n: ");
 					 break;
 			}
+			
+			// Update document flag data.
 			documentLineCount = textData.size();
+			
+			// Update the edit flag.
+			docChange = commandID == 's' ? true : docChange;
+
 		}
 		
 		// Nothing was entered into the buffer.

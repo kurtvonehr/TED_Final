@@ -38,7 +38,6 @@ public class EditorRuntime {
 	static Editor edit;
     
 	// --- Main Routine -----------------------------------//
-
 	
 	//---------------------------------------------------------------//	
 	// Core Runtime Method		                                     //

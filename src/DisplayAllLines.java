@@ -1,21 +1,33 @@
-import java.util.LinkedList;
 import java.util.ListIterator;
 
+/*---------------------------------------------------------------------*
+ * DisplayAllLines.java                            		       		   *
+ *---------------------------------------------------------------------*
+ *   Description - A command class used to print off all the lines	   *
+ *   			that are in the file were reading in.				   *
+ *---------------------------------------------------------------------*
+ * Project: Project 4 : TED	 	                                       *
+ * Author : McKim A. Jacob, Vonehr Kurt						           *
+ * Date Of Creation: 4 - 6 - 2014                                      *
+ *---------------------------------------------------------------------*
+ * ISSUES AND NOTES						      						   *
+ *---------------------------------------------------------------------*
+ *
+ *
+ *
+ *---------------------------------------------------------------------*/
 
 public class DisplayAllLines implements ICommand {
 
 	@Override
 	public boolean executeCommand(String command, ListIterator<String> currentData) {
 		// TODO Auto-generated method stub
-		return false;
+		
+		// Return that method completed.
+		return true;
+		
 	}
-
-	@Override
-	public void printError() {
-		// TODO Auto-generated method stub
-
-	}
-
+	
 	@Override
 	public void printCommandHelp() {
 		// TODO Auto-generated method stub

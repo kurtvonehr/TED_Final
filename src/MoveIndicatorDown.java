@@ -1,5 +1,21 @@
-import java.util.LinkedList;
 import java.util.ListIterator;
+
+/*---------------------------------------------------------------------*
+ * MoveIndicatorDown.java                            		       	   *
+ *---------------------------------------------------------------------*
+ *  Description - A command class used to shift the current line down  *
+ *  				one to the next line in the file.				   *
+ *---------------------------------------------------------------------*
+ * Project: Project 4 : TED	 	                                       *
+ * Author : McKim A. Jacob, Vonehr Kurt						           *
+ * Date Of Creation: 4 - 6 - 2014                                      *
+ *---------------------------------------------------------------------*
+ * ISSUES AND NOTES						      						   *
+ *---------------------------------------------------------------------*
+ *
+ *
+ *
+ *---------------------------------------------------------------------*/
 
 
 public class MoveIndicatorDown implements ICommand {
@@ -11,13 +27,9 @@ public class MoveIndicatorDown implements ICommand {
 			currentData.next();
 		}
 		
-		return false;
-	}
-
-	@Override
-	public void printError() {
-		// TODO Auto-generated method stub
-
+		// Return that method completed.
+		return true;
+		
 	}
 
 	@Override

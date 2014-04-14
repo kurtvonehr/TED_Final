@@ -1,6 +1,21 @@
-import java.util.LinkedList;
 import java.util.ListIterator;
 
+/*---------------------------------------------------------------------*
+ * ClearLines.java                            		       			   *
+ *---------------------------------------------------------------------*
+ *   Description - A command class used to clear the file of all of	   *
+ *   	its contents. Basically starting the buffer from scratch.	   *
+ *---------------------------------------------------------------------*
+ * Project: Project 4 : TED	 	                                       *
+ * Author : McKim A. Jacob, Vonehr Kurt						           *
+ * Date Of Creation: 4 - 6 - 2014                                      *
+ *---------------------------------------------------------------------*
+ * ISSUES AND NOTES						      						   *
+ *---------------------------------------------------------------------*
+ *
+ *
+ *
+ *---------------------------------------------------------------------*/
 
 public class ClearLines implements ICommand {
 
@@ -15,14 +30,10 @@ public class ClearLines implements ICommand {
 		currentData.previous();
 		currentData.remove();
 		
-		return false;
+		// Return that method completed.
+		return true;
 	}
 
-	@Override
-	public void printError() {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public void printCommandHelp() {
