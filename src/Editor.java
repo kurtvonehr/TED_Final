@@ -160,6 +160,7 @@ public class Editor implements IEditor {
 				
 				// Display list of commands.
 				case 'h':
+					error = true;
 					command = new Help ();
 					command.executeCommand(input, CurrentLine);
 				break;
@@ -180,7 +181,7 @@ public class Editor implements IEditor {
 				default:
 					 error = true;
 					 System.out.println("Incorrect Input Format. \nShould be of form: [command] [data_entry]");
-					 System.out.print("\n=> ");
+					 System.out.print("\n: ");
 					 break;
 			}
 			documentLineCount = textData.size();
@@ -190,7 +191,7 @@ public class Editor implements IEditor {
 		else{
 			error = true;
  			System.out.println("Command does not match an existing command, enter 'h' for help. ");
- 			System.out.print("\n=> ");
+ 			System.out.print("\n: ");
 		}
 		
 	}
