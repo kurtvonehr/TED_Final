@@ -1,11 +1,12 @@
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 
 public class SaveFile implements ICommand {
 
 
 	@Override
-	public boolean executeCommand(String command, LinkedList currentData) {
+	public boolean executeCommand(String command, ListIterator<String> currentData) {
 		// TODO Auto-generated method stub
 		return false;
 	}
