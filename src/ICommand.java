@@ -24,9 +24,6 @@ public interface ICommand {
 	// Core Function Decelerations			     					//
 	//--------------------------------------------------------------// 
 	
-	/* Determines if valid command */
-	public boolean validCommand (String input);
-	
 	/* Called to execute the command*/
 	public boolean executeCommand (String command, LinkedList currentData);
 	

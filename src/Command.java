@@ -40,23 +40,6 @@ public class Command implements ICommand {
 	
 	@Override
 	
-	public boolean validCommand(String input) {
-		
-		//assume that command is initially false
-		boolean valid = false;
-		
-		//first char in the string input should
-		//be a valid command
-		char command = input.charAt(0);
-		
-		//checks command against available commands
-		//and arguments for each command. If there is no
-		//space between the command and the arguments, input is false
-	
-			
-		//returns if the command is valid
-		return valid;
-	}
 	
 	public boolean executeCommand(String input, LinkedList currentData) {
 		

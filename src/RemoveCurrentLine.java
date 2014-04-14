@@ -3,11 +3,6 @@ import java.util.LinkedList;
 
 public class RemoveCurrentLine implements ICommand {
 
-	@Override
-	public boolean validCommand(String input) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public boolean executeCommand(String command, LinkedList currentData) {

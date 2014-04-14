@@ -4,12 +4,6 @@ import java.util.LinkedList;
 public class Exit implements ICommand {
 
 	@Override
-	public boolean validCommand(String input) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public boolean executeCommand(String command, LinkedList currentData) {
 		// TODO Auto-generated method stub
 		return false;
