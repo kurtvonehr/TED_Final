@@ -118,12 +118,14 @@ public class Editor implements IEditor {
 				
 				// Move current line down a position.
 				case 'm':
-					
+				command = new MoveIndicatorDown();
+				command.executeCommand(input, CurrentLine);
 				break;
 			
 				// Move current line up 1 position.
 				case 'u':
-			
+				command = new MoveIndicatorUp();
+				command.executeCommand(input, CurrentLine);
 				break;
 			
 				// Remove the current line.
@@ -232,8 +234,8 @@ public class Editor implements IEditor {
 		
 
 		//restore current line back to it's previous index
-		//while(CurrentLine.previousIndex() != restoreCurrentLine)
-		//	CurrentLine.previous();
+		while(CurrentLine.previousIndex() != restoreCurrentLine)
+			CurrentLine.previous();
 		
 
 	}

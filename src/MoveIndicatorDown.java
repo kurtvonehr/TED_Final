@@ -6,7 +6,11 @@ public class MoveIndicatorDown implements ICommand {
 
 	@Override
 	public boolean executeCommand(String command, ListIterator<String> currentData) {
-		// TODO Auto-generated method stub
+		
+		if(currentData.hasNext()){
+			currentData.next();
+		}
+		
 		return false;
 	}
 
