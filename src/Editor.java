@@ -80,13 +80,25 @@ public class Editor implements IEditor {
 	 ****************************************************************/
 	@Override
 	public void processCommand(String input) {
+		
+        	 // --- Variable Declarations  ---------------------------//
+
 			
-		// Error check that the command is valid format.
-		if((input.length()>1 && input.charAt(1) == ' ') || 
+		/* The identifier received for the command to be executed. */
+		char commandID;
+		
+		// --- Main Routine -------------------------------------//
+
+		// Error check that the command is valid.
+		if((input.length() > 1 && input.charAt(1) == ' ') || 
 												input.length() == 1) {
 			
+			// Extract the first character from the command.
+			commandID = input.charAt(0);
+			commandID = Character.toLowerCase(commandID);
+			
 			// Go through and match a command to run.
-			switch( input.charAt(0) ){
+			switch( commandID ){
 			
 				// Insert before current line.
 				case 'b':
@@ -144,11 +156,17 @@ public class Editor implements IEditor {
 					
 				break;
 				
+				// Insert after last line. 
+				case 'e':
+					
+				break;
+				
 				// Invalid command entered.
 				default:
-					System.out.println("Incorrect Input Format. \nShould be of form: [command] [data_entry]");
-					System.out.print("\n=> ");
-					break;
+					System.out.println( "!!!> Oops, An invalid command"
+							+ " was entered.Type h for a list of "
+							+ "commands." );
+				break;
 			}
 			
 			// Update the list size.
@@ -157,10 +175,9 @@ public class Editor implements IEditor {
 		}
 		
 		// Nothing was entered into the buffer.
-		else{
-			System.out.println("Command does not match an existing command, enter 'h' for help. ");
-			System.out.print("\n=> ");
-		}
+		else
+			System.out.println("!!!> Oops, nothing was entered in for "
+					+ "a command. Type h for a list of commands.");
 		
 	}
 	
