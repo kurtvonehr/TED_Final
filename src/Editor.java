@@ -102,13 +102,14 @@ public class Editor implements IEditor {
 			
 				// Insert before current line.
 				case 'b':
+				
 				command = new BeforeLine();
 				command.executeCommand(input, CurrentLine);
 				break;
 				
 				// Insert after current line.
 				case 'i':
-			
+				
 				break;
 				
 				// Move current line down a position.
@@ -123,7 +124,7 @@ public class Editor implements IEditor {
 			
 				// Remove the current line.
 				case 'r':
-					
+				
 				break;
 			
 				// Display the project buffer.
@@ -133,7 +134,7 @@ public class Editor implements IEditor {
 				
 				// Clear and remove all lines in buffer.
 				case 'c':
-					
+				
 				break;
 				
 				// Save file contents to a file directory.
@@ -167,10 +168,7 @@ public class Editor implements IEditor {
 					 System.out.print("\n=> ");
 					 break;
 			}
-			
-			// Update the list size.
 			documentLineCount = textData.size();
-			
 		}
 		
 		// Nothing was entered into the buffer.
@@ -194,6 +192,7 @@ public class Editor implements IEditor {
 	@Override
 	public int getDocumentLineCount() {
 		
+		// Update the list size.
 		return documentLineCount;
 		
 	}
@@ -208,11 +207,27 @@ public class Editor implements IEditor {
 	public void drawDocument() {
 
 		clearConsole();
+		
+		//int restoreCurrentLine = CurrentLine.nextIndex();
 
+		//move iterator to front of list
+		
+		while(CurrentLine.previousIndex() != -1)
+			CurrentLine.previous();
+		
+		//Program Title
+		System.out.print("TED - A Text Editor \n\n");
+		
+		//Move through entire list and print each string
 		for(int i = 0; i<documentLineCount;i++){
-			
-			System.out.println();
+			System.out.println("" + (i+1) + " " + CurrentLine.next());
 		}
+		
+
+		//restore current line back to it's previous index
+		//while(CurrentLine.previousIndex() != restoreCurrentLine)
+		//	CurrentLine.previous();
+		
 
 	}
 	
