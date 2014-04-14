@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 /*--------------------------------------------------------------------*
 * Command.java                            		    	         	  *
@@ -41,7 +42,7 @@ public class Command implements ICommand {
 	@Override
 	
 	
-	public boolean executeCommand(String input, LinkedList currentData) {
+	public boolean executeCommand(String input, ListIterator<String> currentData) {
 		
 		char command = input.charAt(0);
 		// TODO Auto-generated method stub

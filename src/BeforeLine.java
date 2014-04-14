@@ -6,7 +6,7 @@ public class BeforeLine implements ICommand {
 
 
 	@Override
-	public boolean executeCommand(String command, ListIterator currentData) {
+	public boolean executeCommand(String command, ListIterator<String> currentData) {
 		
 		
 		return false;
