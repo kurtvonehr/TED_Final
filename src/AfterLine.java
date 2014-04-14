@@ -7,8 +7,18 @@ public class AfterLine implements ICommand {
 
 	@Override
 	public boolean executeCommand(String command, ListIterator<String> currentData) {
-		// TODO Auto-generated method stub
+		
+		String insertedText = command.substring(1,command.length());
+		if(currentData.hasNext()){
+			currentData.next();
+			currentData.add(insertedText);
+			currentData.previous();
+		}
+		else
+			currentData.add(insertedText);
+		
 		return false;
+	
 	}
 
 	@Override

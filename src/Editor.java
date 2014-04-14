@@ -38,6 +38,8 @@ public class Editor implements IEditor {
     
     /* Generic command */
     ICommand command;
+    
+    boolean error = false;
 	
 	//---------------------------------------------------------------//	
 	// Class Constructors                                            //
@@ -93,6 +95,7 @@ public class Editor implements IEditor {
 		if((input.length() > 1 && input.charAt(1) == ' ') || 
 												input.length() == 1) {
 			
+			error = false;
 			// Extract the first character from the command.
 			commandID = input.charAt(0);
 			commandID = Character.toLowerCase(commandID);
@@ -109,7 +112,8 @@ public class Editor implements IEditor {
 				
 				// Insert after current line.
 				case 'i':
-				
+				command = new AfterLine();
+				command.executeCommand(input, CurrentLine);
 				break;
 				
 				// Move current line down a position.
@@ -164,7 +168,8 @@ public class Editor implements IEditor {
 				
 				// Invalid command entered.
 				default:
-					System.out.println("Incorrect Input Format. \nShould be of form: [command] [data_entry]");
+					 error = true;
+					 System.out.println("Incorrect Input Format. \nShould be of form: [command] [data_entry]");
 					 System.out.print("\n=> ");
 					 break;
 			}
@@ -173,12 +178,12 @@ public class Editor implements IEditor {
 		
 		// Nothing was entered into the buffer.
 		else{
+			error = true;
  			System.out.println("Command does not match an existing command, enter 'h' for help. ");
  			System.out.print("\n=> ");
 		}
 		
 	}
-	
 
 	/*****************************************************************
 	 * @Description - A method utilized to return the total number of 
@@ -245,6 +250,10 @@ public class Editor implements IEditor {
 	    for(int i=0;i<30;i++){
 	    	System.out.println();
 	    }
+	}
+	
+	public boolean isError() {
+		return error;
 	}
 	
 	//--------------------------------------------------------------// 

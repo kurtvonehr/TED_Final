@@ -64,7 +64,7 @@ public class EditorRuntime {
 		// Begin continuous loop until forced exit.
 		while ( stayAlive )
 		{
-			if(!errorMessage){
+			if(!edit.isError()){
 				// Draw the document.
 				edit.drawDocument();
 				System.out.print("\n=> ");
