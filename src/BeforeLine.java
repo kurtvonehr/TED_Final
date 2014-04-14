@@ -12,7 +12,6 @@ public class BeforeLine implements ICommand {
 		if(currentData.hasPrevious()){
 			currentData.previous();
 			currentData.add(insertedText);
-			currentData.next();
 		}
 		else
 			currentData.add(insertedText);

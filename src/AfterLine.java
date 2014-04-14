@@ -10,9 +10,7 @@ public class AfterLine implements ICommand {
 		
 		String insertedText = command.substring(1,command.length());
 		if(currentData.hasNext()){
-			currentData.next();
 			currentData.add(insertedText);
-			currentData.previous();
 		}
 		else
 			currentData.add(insertedText);

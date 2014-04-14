@@ -172,7 +172,7 @@ public class Editor implements IEditor {
 				
 				// Insert after last line. 
 				case 'e':
-					command = new AfterLast ();
+					//command = new AfterLast ();
 					command.executeCommand(input, CurrentLine);
 				break;
 				
@@ -240,7 +240,6 @@ public class Editor implements IEditor {
 				System.out.println("" + (i+1) + "    " + CurrentLine.next());
 		}
 		
-
 		//restore current line back to it's previous index
 		while(CurrentLine.previousIndex() != restoreCurrentLine)
 			CurrentLine.previous();

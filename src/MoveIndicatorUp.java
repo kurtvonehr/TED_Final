@@ -7,8 +7,8 @@ public class MoveIndicatorUp implements ICommand {
 	@Override
 	public boolean executeCommand(String command, ListIterator<String> currentData) {
 	
-		if(currentData.hasPrevious()){
-			currentData.previous();
+		if(currentData.hasPrevious() && currentData.previousIndex() > 0){
+				currentData.previous();
 		}
 		
 		return false;
