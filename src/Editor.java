@@ -213,10 +213,9 @@ public class Editor implements IEditor {
 
 		clearConsole();
 		
-		//int restoreCurrentLine = CurrentLine.nextIndex();
+		int restoreCurrentLine = CurrentLine.previousIndex();
 
 		//move iterator to front of list
-		
 		while(CurrentLine.previousIndex() != -1)
 			CurrentLine.previous();
 		
@@ -225,7 +224,10 @@ public class Editor implements IEditor {
 		
 		//Move through entire list and print each string
 		for(int i = 0; i<documentLineCount;i++){
-			System.out.println("" + (i+1) + " " + CurrentLine.next());
+			if(restoreCurrentLine == i)
+				System.out.println("" + (i+1) + " => " + CurrentLine.next());
+			else
+				System.out.println("" + (i+1) + "    " + CurrentLine.next());
 		}
 		
 

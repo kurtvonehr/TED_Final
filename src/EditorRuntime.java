@@ -67,7 +67,7 @@ public class EditorRuntime {
 			if(!edit.isError()){
 				// Draw the document.
 				edit.drawDocument();
-				System.out.print("\n=> ");
+				System.out.print("\n: ");
 			}
 			
 			// Scan for a command. 
