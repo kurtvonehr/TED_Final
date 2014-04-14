@@ -35,6 +35,9 @@ public class Editor implements IEditor {
 	
 	/* Current line that the commands are operating on. */
     ListIterator<String> CurrentLine;
+    
+    /* Generic command */
+    ICommand command;
 	
 	//---------------------------------------------------------------//	
 	// Class Constructors                                            //
@@ -78,7 +81,7 @@ public class Editor implements IEditor {
 	@Override
 	public void processCommand(String input) {
 			
-		// Error check that the command is valid.
+		// Error check that the command is valid format.
 		if((input.length()>1 && input.charAt(1) == ' ') || 
 												input.length() == 1) {
 			
@@ -87,6 +90,7 @@ public class Editor implements IEditor {
 			
 				// Insert before current line.
 				case 'b':
+				command = new BeforeLine();
 				
 				break;
 				
@@ -175,6 +179,24 @@ public class Editor implements IEditor {
 		
 		return documentLineCount;
 		
+	}
+	
+	/*****************************************************************
+	 * @Description - A method called to draw the linked list of text
+	 * object lines of the document.
+	 *
+	 * @Returns - (N/A)
+	 *
+	 ****************************************************************/
+	public void drawDocument() {
+
+		clearConsole();
+
+		for(int i = 0; i<documentLineCount;i++){
+			
+			System.out.println();
+		}
+
 	}
 	
 	
