@@ -83,7 +83,7 @@ public class Editor implements IEditor {
 												input.length() == 1) {
 			
 			// Go through and match a command to run.
-			switch( input.charAt(1) ){
+			switch( input.charAt(0) ){
 			
 				// Insert before current line.
 				case 'b':
@@ -142,10 +142,9 @@ public class Editor implements IEditor {
 				
 				// Invalid command entered.
 				default:
-					System.out.println( "!!!> Oops, An invalid command"
-							+ " was entered.Type h for a list of "
-							+ "commands." );
-				break;
+					System.out.println("Incorrect Input Format. \nShould be of form: [command] [data_entry]");
+					System.out.print("\n=> ");
+					break;
 			}
 			
 			// Update the list size.
@@ -154,9 +153,10 @@ public class Editor implements IEditor {
 		}
 		
 		// Nothing was entered into the buffer.
-		else
-			System.out.println("!!!> Oops, nothing was entered in for "
-					+ "a command. Type h for a list of commands.");
+		else{
+			System.out.println("Command does not match an existing command, enter 'h' for help. ");
+			System.out.print("\n=> ");
+		}
 		
 	}
 	
