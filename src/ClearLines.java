@@ -27,8 +27,10 @@ public class ClearLines implements ICommand {
 			currentData.remove();
 		while(currentData.previousIndex() > 0)
 			currentData.remove();
-		currentData.previous();
-		currentData.remove();
+		if(currentData.hasPrevious()){
+			currentData.previous();
+			currentData.remove();
+		}
 		
 		// Return that method completed.
 		return true;

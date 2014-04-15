@@ -65,13 +65,18 @@ public class LoadFile implements ICommand {
 		{
 			try(BufferedReader bufferFile = new BufferedReader(new FileReader(commandSpilt))) {
 				
+				String textLine = bufferFile.readLine();
+				// Add contents to linked list.
+				while (textLine != null){
+					currentData.add(textLine);
+					textLine = bufferFile.readLine();
+				}
+				
 				//move iterator to front of list
 				while(currentData.previousIndex() != -1)
 					currentData.previous();
 				
-				// Add contents to linked list.
-				while (bufferFile.readLine() != null)
-					currentData.add( bufferFile.readLine() );
+				currentData.next();
 				
 				// Close the file stream.
 				bufferFile.close();

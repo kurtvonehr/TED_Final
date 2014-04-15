@@ -156,6 +156,8 @@ public class Editor implements IEditor {
 			
 				// Load a files contents from a directory.
 				case 'l':
+					command = new ClearLines ();
+					command.executeCommand(input, CurrentLine);
 					command = new LoadFile ();
 					command.executeCommand(input, CurrentLine);
 				break;
