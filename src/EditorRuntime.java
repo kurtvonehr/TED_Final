@@ -65,6 +65,7 @@ public class EditorRuntime {
 		{
 			if(!edit.isError()){
 				// Draw the document.
+				System.out.print(filename);
 				edit.drawDocument();
 				System.out.print("\n: ");
 			}
@@ -73,7 +74,7 @@ public class EditorRuntime {
 			try 
 			{
 				String input =  inputReader.readLine();
-				edit.processCommand(input);
+				stayAlive = !edit.processCommand(input);
 			}
 			
 			catch (IOException e) {
@@ -103,7 +104,7 @@ public class EditorRuntime {
 		
 		edit.clearConsole();
 		
-		System.out.println("TED - A Text Editor \n\n" + filename + ".txt");
+		System.out.println("TED - A Text Editor \n\n" + filename);
 		
 	}
 	

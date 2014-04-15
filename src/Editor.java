@@ -80,10 +80,12 @@ public class Editor implements IEditor {
 	 *
 	 ****************************************************************/
 	@Override
-	public void processCommand(String input) {
+	public boolean processCommand(String input) {
 		
         	 // --- Variable Declarations  ---------------------------//
-
+		
+		//determines if system should exit program
+		boolean exit = false;
 			
 		/* The identifier received for the command to be executed. */
 		char commandID;
@@ -187,8 +189,9 @@ public class Editor implements IEditor {
 					else
 					{
 						System.out.println("Good bye!");
-						System.exit(0);
 					}
+					
+					exit = true;
 					
 				break;
 				
@@ -221,6 +224,8 @@ public class Editor implements IEditor {
  			System.out.println("Command does not match an existing command, enter 'h' for help. ");
  			System.out.print("\n: ");
 		}
+		
+		return exit;
 		
 	}
 
