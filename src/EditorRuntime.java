@@ -65,7 +65,6 @@ public class EditorRuntime {
 		{
 			if(!edit.isError()){
 				// Draw the document.
-				System.out.print(filename);
 				edit.drawDocument();
 				System.out.print("\n: ");
 			}

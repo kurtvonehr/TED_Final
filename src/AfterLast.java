@@ -20,11 +20,14 @@ import java.util.ListIterator;
 public class AfterLast implements ICommand {
 
 	@Override
-	public boolean executeCommand(String command,
-										ListIterator<String> currentData) {
-		// TODO Auto-generated method stub
+	public boolean executeCommand(String command, ListIterator<String> currentData) {
+
+		while(currentData.hasNext())
+			currentData.next();
 		
-		// Return that method completed.
+		String insertedText = command.substring(1,command.length());
+		currentData.add(insertedText);
+		
 		return true;
 	}
 	

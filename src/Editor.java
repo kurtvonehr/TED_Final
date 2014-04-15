@@ -122,13 +122,13 @@ public class Editor implements IEditor {
 				// Move current line down a position.
 				case 'm':
 					command = new MoveIndicatorDown ();
-					command.executeCommand(input, CurrentLine);
+					error = command.executeCommand(input, CurrentLine);
 				break;
 			
 				// Move current line up 1 position.
 				case 'u':
 					command = new MoveIndicatorUp ();
-					command.executeCommand(input, CurrentLine);
+					error = command.executeCommand(input, CurrentLine);
 				break;
 			
 				// Remove the current line.

@@ -23,12 +23,36 @@ public class MoveIndicatorDown implements ICommand {
 	@Override
 	public boolean executeCommand(String command, ListIterator<String> currentData) {
 		
-		if(currentData.hasNext()){
-			currentData.next();
+		int movedLine;
+		boolean error = false;
+		String insertedText;
+	
+		if(command.length() == 1){
+			if(currentData.hasNext() && currentData.nextIndex() > 0){
+					currentData.next();
+			}
 		}
-		
+		else{
+			insertedText = command.substring(2,command.length());
+			if(insertedText.matches("[0-9].*")){
+				try{
+					movedLine = Integer.parseInt(insertedText);
+					for(int i = 0; i < movedLine; i++)
+						if(currentData.hasNext() && currentData.nextIndex() > 0)
+							currentData.next();
+				}
+				catch(NumberFormatException e){
+					System.out.println("Please enter a valid number");
+					error = true;
+				}
+			}
+			else{
+				System.out.println("Please enter a valid number");
+				error = true;
+			}
+		}
 		// Return that method completed.
-		return true;
+		return error;
 		
 	}
 
