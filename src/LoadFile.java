@@ -1,5 +1,7 @@
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ListIterator;
 import java.util.Scanner;
@@ -37,10 +39,7 @@ public class LoadFile implements ICommand {
         // --- Variable Declarations  ---------------------------//
 		
 		/* The array of the broken up command for reading in. */
-		String commandSpilt [];
-		
-		/* The file object to be read in. */
-		File bufferFile;
+		String commandSpilt;
 		
 		/* The file stream reader that scans the file in. */
 		Scanner fileRead;
@@ -48,7 +47,10 @@ public class LoadFile implements ICommand {
 		/* Whether or not the command was successful. */
 		boolean commandSuccess = false;
 		
-		// --- Main Routine -------------------------------------//
+		// --- Main Routine -------------------------------------//\
+		
+		// Split the command and try to open and read the file.	
+		commandSpilt = command.substring(1, command.length());
 		
 		
 		// Print the help command.
@@ -61,22 +63,18 @@ public class LoadFile implements ICommand {
 		// Process the file in.
 		else
 		{
-			try {
+			try(BufferedReader bufferFile = new BufferedReader(new FileReader(commandSpilt))) {
 				
-				// Split the command and try to open and read the file.	
-				commandSpilt = command.split("\"");
-				
-				bufferFile = new File (commandSpilt[1]);
-				
-				// open the file stream for reading.
-				fileRead = new Scanner (bufferFile);
+				//move iterator to front of list
+				while(currentData.previousIndex() != -1)
+					currentData.previous();
 				
 				// Add contents to linked list.
-				while (fileRead.hasNextLine())
-					currentData.add( fileRead.nextLine() );
+				while (bufferFile.readLine() != null)
+					currentData.add( bufferFile.readLine() );
 				
 				// Close the file stream.
-				fileRead.close();
+				bufferFile.close();
 				
 			} 
 			

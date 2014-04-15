@@ -192,7 +192,7 @@ public class Editor implements IEditor {
 				
 				// Insert after last line. 
 				case 'e':
-					//command = new AfterLast ();
+					command = new AfterLast ();
 					command.executeCommand(input, CurrentLine);
 				break;
 				
@@ -282,7 +282,7 @@ public class Editor implements IEditor {
 	 * @Returns - (N/A)
 	 *
 	 ****************************************************************/
-	public final static void clearConsole()
+	public final void clearConsole()
 	{
 	    //Push old editor out of visible site on terminal.
 	    for(int i=0;i<30;i++){
@@ -290,6 +290,7 @@ public class Editor implements IEditor {
 	    }
 	}
 	
+
 	public boolean isError() {
 		return error;
 	}

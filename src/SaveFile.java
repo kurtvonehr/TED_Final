@@ -37,7 +37,7 @@ public class SaveFile implements ICommand {
         // --- Variable Declarations  ---------------------------//
 		
 		/* The array of the broken up command for reading in. */
-		String commandSpilt [];
+		String commandSpilt;
 		
 		/* The file object to be read in. */
 		File bufferFile;
@@ -63,12 +63,16 @@ public class SaveFile implements ICommand {
 		{
 			try {
 				// Split the command and try to open and read the file.
-				commandSpilt = command.split("\"");
+				commandSpilt = command.substring(1, command.length());
 				
-				bufferFile = new File (commandSpilt[1]);
+				bufferFile = new File (commandSpilt);
 				
 				// open the file stream for reading.
 				fileWrite = new PrintWriter (bufferFile);
+				
+				//move iterator to front of list
+				while(currentData.previousIndex() != -1)
+					currentData.previous();
 				
 				// Add contents to linked list.
 				while (currentData.hasNext())
