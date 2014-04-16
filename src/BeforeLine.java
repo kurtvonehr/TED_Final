@@ -9,23 +9,30 @@ import java.util.ListIterator;
  * Project: Project 4 : TED	 	                                       *
  * Author : McKim A. Jacob, Vonehr Kurt						           *
  * Date Of Creation: 4 - 6 - 2014                                      *
- *---------------------------------------------------------------------*
- * ISSUES AND NOTES						      						   *
- *---------------------------------------------------------------------*
- *
- *
- *
  *---------------------------------------------------------------------*/
 
 
 public class BeforeLine implements ICommand {
 
+	//--------------------------------------------------------------//
+	// Function Definitions					     					//
+	//--------------------------------------------------------------//
 
 	@Override
 	public boolean executeCommand(String command, 
-										ListIterator<String> currentData) {
+									ListIterator<String> currentData) {
+        
+		// --- Variable Declarations  ---------------------------//
 		
-		String insertedText = command.substring(1,command.length());
+		/* The text to insert into the document. */
+		String insertedText;
+		
+		// --- Main Routine -------------------------------------//
+		
+		// Extract the content to be added.
+		insertedText = command.substring(1,command.length());
+		
+		// Insert the content in.
 		if(currentData.hasPrevious()){
 			currentData.previous();
 			currentData.add(insertedText);
@@ -38,10 +45,23 @@ public class BeforeLine implements ICommand {
 		
 	}
 
+	//--------------------------------------------------------------//
+	
 	@Override
+	/* Prints out command help information. */
 	public void printCommandHelp() {
-		// TODO Auto-generated method stub
-
+		
+		System.out.println("------------------------------------------");
+		System.out.println("b - Insert Before Line");
+		System.out.println("------------------------------------------");
+		System.out.println("Desc - Adds content before the current");
+		System.out.println("line. ");
+		System.out.println("Example command :");
+		System.out.println("b Add this before the current line. ");
+		System.out.println("------------------------------------------");
+        
 	}
+	
+	//--------------------------------------------------------------//
 
 }

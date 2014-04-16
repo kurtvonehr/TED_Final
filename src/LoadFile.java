@@ -16,13 +16,7 @@ import java.util.regex.PatternSyntaxException;
 *---------------------------------------------------------------------*
 * Project: Project 4 : TED	 	                                      *
 * Author : McKim A. Jacob, Vonehr Kurt						          *
-* Date Of Creation: 4 - 6 - 2014                                      *
-*---------------------------------------------------------------------*
-* ISSUES AND NOTES						      						  *	                                      
-*---------------------------------------------------------------------*
-* 
-*                                 
-*                                 
+* Date Of Creation: 4 - 6 - 2014                                      *                              
 *---------------------------------------------------------------------*/
 
 public class LoadFile implements ICommand {
@@ -47,7 +41,7 @@ public class LoadFile implements ICommand {
 		/* Whether or not the command was successful. */
 		boolean commandSuccess = false;
 		
-		// --- Main Routine -------------------------------------//\
+		// --- Main Routine -------------------------------------//
 		
 		// Split the command and try to open and read the file.	
 		commandSpilt = command.substring(1, command.length());
@@ -63,7 +57,8 @@ public class LoadFile implements ICommand {
 		// Process the file in.
 		else
 		{
-			try(BufferedReader bufferFile = new BufferedReader(new FileReader(commandSpilt))) {
+			try(BufferedReader bufferFile = new BufferedReader
+								( new FileReader(commandSpilt) ) ) {
 				
 				String textLine = bufferFile.readLine();
 				// Add contents to linked list.
@@ -112,6 +107,8 @@ public class LoadFile implements ICommand {
 		
 	}
 
+	//--------------------------------------------------------------//
+	
 	@Override
 	/* Prints out command help information. */
 	public void printCommandHelp() {

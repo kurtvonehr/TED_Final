@@ -9,12 +9,6 @@ import java.util.ListIterator;
  * Project: Project 4 : TED	 	                                       *
  * Author : McKim A. Jacob, Vonehr Kurt						           *
  * Date Of Creation: 4 - 6 - 2014                                      *
- *---------------------------------------------------------------------*
- * ISSUES AND NOTES						      						   *
- *---------------------------------------------------------------------*
- *
- *
- *
  *---------------------------------------------------------------------*/
 
 public class Help implements ICommand {
@@ -55,6 +49,8 @@ public class Help implements ICommand {
 		// Return that method completed.
 		return true;
 	}
+	
+	//--------------------------------------------------------------//
 
 	@Override
 	/* Prints out command help information. */

@@ -9,12 +9,6 @@ import java.util.ListIterator;
  * Project: Project 4 : TED	 	                                       *
  * Author : McKim A. Jacob, Vonehr Kurt						           *
  * Date Of Creation: 4 - 6 - 2014                                      *
- *---------------------------------------------------------------------*
- * ISSUES AND NOTES						      						   *
- *---------------------------------------------------------------------*
- *
- *
- *
  *---------------------------------------------------------------------*/
 
 public class AfterLine implements ICommand {
@@ -36,10 +30,23 @@ public class AfterLine implements ICommand {
 		
 	}
 
+	//--------------------------------------------------------------//
+	
 	@Override
+	/* Prints out command help information. */
 	public void printCommandHelp() {
-		// TODO Auto-generated method stub
-
+		
+		System.out.println("------------------------------------------");
+		System.out.println("i - Insert after Line");
+		System.out.println("------------------------------------------");
+		System.out.println("Desc - Adds content after the current");
+		System.out.println("line. ");
+		System.out.println("Example command :");
+		System.out.println("i Add this after the current line. ");
+		System.out.println("------------------------------------------");
+        
 	}
+	
+	//--------------------------------------------------------------//
 
 }

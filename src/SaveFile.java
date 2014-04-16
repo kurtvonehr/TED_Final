@@ -15,12 +15,6 @@ import java.util.regex.PatternSyntaxException;
  * Project: Project 4 : TED	 	                                       *
  * Author : McKim A. Jacob, Vonehr Kurt						           *
  * Date Of Creation: 4 - 6 - 2014                                      *
- *---------------------------------------------------------------------*
- * ISSUES AND NOTES						      						   *
- *---------------------------------------------------------------------*
- *
- *
- *
  *---------------------------------------------------------------------*/
 
 public class SaveFile implements ICommand {
@@ -49,7 +43,6 @@ public class SaveFile implements ICommand {
 		boolean commandSuccess = false;
 		
 		// --- Main Routine -------------------------------------//
-		
 		
 		// Print the help command.
 		if (command.equals ("s -h"))
@@ -110,6 +103,8 @@ public class SaveFile implements ICommand {
 		return commandSuccess;
 		
 	}
+	
+	//--------------------------------------------------------------//
 	
 	@Override
 	/* Prints out command help information. */
