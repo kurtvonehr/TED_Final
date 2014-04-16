@@ -25,21 +25,41 @@ public class RemoveCurrentLine implements ICommand {
 
 	@Override
 	/* Executes a file load sequence if required. */
-	public boolean executeCommand(String command, 
-										ListIterator<String> currentData) {
+	public boolean executeCommand(String command, ListIterator<String> currentData) {
 		
-		if(currentData.hasNext()){
-			currentData.previous();
-			currentData.remove();
-			currentData.next();
+		int movedLine;
+		boolean error = false;
+		String insertedText;
+	
+		if(command.length() == 1){
+			if(currentData.hasPrevious() && currentData.previousIndex() > 0){
+					currentData.previous();
+					currentData.remove();
+			}
 		}
-		else if(currentData.hasPrevious()){
-			currentData.previous();
-			currentData.remove();
+		else{
+			insertedText = command.substring(2,command.length());
+			if(insertedText.matches("[0-9].*")){
+				try{
+					movedLine = Integer.parseInt(insertedText);
+					for(int i = 0; i < movedLine; i++)
+						if(currentData.hasPrevious() && currentData.previousIndex() > 0){
+							currentData.previous();
+							currentData.remove();
+						}
+				}
+				catch(NumberFormatException e){
+					System.out.println("Please enter a valid number");
+					error = true;
+				}
+			}
+			else{
+				System.out.println("Please enter a valid number");
+				error = true;
+			}
 		}
-		
 		// Return that method completed.
-		return true;
+		return error;
 		
 	}
 	
