@@ -139,6 +139,7 @@ public class Editor implements IEditor {
 			
 				// Display the project buffer.
 				case 'd':
+					clearConsole();
 					command = new DisplayAllLines ();
 					command.executeCommand(input, CurrentLine);
 				break;
