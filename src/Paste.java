@@ -1,72 +1,70 @@
 import java.util.ListIterator;
 
 /*---------------------------------------------------------------------*
- * ClearLines.java                            		       			   *
+ * Paste.java                 		           		       		   	   *
  *---------------------------------------------------------------------*
- *   Description - A command class used to clear the file of all of	   *
- *   	its contents. Basically starting the buffer from scratch.	   *
+ *    Description - A command class used to execute a cut and paste	   *
+ *      command. This half is used to paste the contents of the clip   *
+ *          			 board to the document.						   *
  *---------------------------------------------------------------------*
  * Project: Project 4 : TED	 	                                       *
  * Author : McKim A. Jacob, Vonehr Kurt						           *
  * Date Of Creation: 4 - 6 - 2014                                      *
  *---------------------------------------------------------------------*/
 
-public class ClearLines implements ICommand {
-
+public class Paste {
+	
 	//--------------------------------------------------------------//
 	// Function Definitions					     					//
 	//--------------------------------------------------------------//
 
-	@Override
-	public boolean executeCommand(String command, 
-								ListIterator<String> currentData) {
+	/* Executes a file load sequence if required. */
+	public boolean executeCommand(String command,
+			ListIterator<String> currentData, ListIterator <String>
+											clipBoard) {
+	
 		
 		// Print the help command.
-		if (command.equals ("c -h"))
+		if (command.equals ("p -h"))
 			printCommandHelp ();
 		
+		// Run command.
 		else
 		{
-			// Loop through and remove lines.
-			while(currentData.hasNext())
-				 currentData.remove();
-			while(currentData.previousIndex() > 0){
-				currentData.previous();
-				if(currentData.next() != null)
-					currentData.remove();
-			}
+			// Traverse to start of clip board.
+			while(clipBoard.previousIndex() != 0)
+				clipBoard.previous();
 			
-			if (currentData.hasPrevious())
-			{
-				 currentData.previous();
-				 currentData.remove();
-			}
+			// Put at the zeroth element.
+			clipBoard.previous();
+			
+			// Copy elements over.
+			while (clipBoard.hasNext())
+				currentData.add(clipBoard.next());
 		}
 		
-		
-		// Return that method completed.
+		// Return the result of the command.
 		return true;
+		
 	}
-
+	
 	//--------------------------------------------------------------//
 	
-	@Override
 	/* Prints out command help information. */
 	public void printCommandHelp() {
 		
 		System.out.println("------------------------------------------");
-		System.out.println("c - Clear All Lines");
+		System.out.println("p - Paste from clipboard");
 		System.out.println("------------------------------------------");
-		System.out.println("Desc - Clears all the lines in the buffer");
-		System.out.println("if saved and shifts the Indicator");
-		System.out.println("accordingly.");
-		System.out.println("Example command :");
-		System.out.println("c ");
+		System.out.println("Desc - Pastes a block of text from the ");
+		System.out.println("clipboard into the document at the current");
+		System.out.println("line.");
+		System.out.println("Example command");
+		System.out.println("p");
 		System.out.println("------------------------------------------");
-        
+
 	}
 	
 	//--------------------------------------------------------------//
-	
 
 }

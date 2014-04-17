@@ -7,20 +7,14 @@ import java.util.ListIterator;
 /*--------------------------------------------------------------------*
 * Editor.java                            		    	         	  *
 *---------------------------------------------------------------------*
-*  Description - The core runtime class that coordinates and executes  *
+*  Description - The core runtime class that coordinates and executes *
 *   the commands and tasks assigned by the user through the command   *
 *   	line. All commands are called and are executed through 		  *
 *   						  this class.							  *
 *---------------------------------------------------------------------*
 * Project: Project 4 : TED	 	                                      *
 * Author : McKim A. Jacob, Vonehr Kurt						          *
-* Date Of Creation: 4 - 6 - 2014                                      *
-*---------------------------------------------------------------------*
-* ISSUES AND NOTES						      						  *	                                      
-*---------------------------------------------------------------------*
-* 
-*                                 
-*                                 
+* Date Of Creation: 4 - 6 - 2014                                      *                             
 *---------------------------------------------------------------------*/
 
 public class Editor implements IEditor {
@@ -41,12 +35,19 @@ public class Editor implements IEditor {
 	/* linked list containing each line of the document. */
 	LinkedList <String> textData;	
 	
+	/* linked list containing each line of the document. */
+	LinkedList <String> clipBoard;
+	
 	/* Current line that the commands are operating on. */
     ListIterator<String> CurrentLine;
+	
+	/* Current line that the clip board is operating on. */
+    ListIterator<String> clipBoardLine;
     
-    /* Generic command */
+    /* Generic command object to be called. */
     ICommand command;
     
+    /* The error flag used. */
     boolean error = false;
 	
 	//---------------------------------------------------------------//	
@@ -67,7 +68,11 @@ public class Editor implements IEditor {
 		// Build the linked list.
 		textData = new LinkedList<String> ();
 		CurrentLine = textData.listIterator();
-
+		
+		// Build the clip board.
+		clipBoard = new LinkedList <String> ();
+		clipBoardLine = clipBoard.listIterator();
+		
 		// Configure the file editor.
 		documentLineCount = 0;
 		
@@ -180,13 +185,15 @@ public class Editor implements IEditor {
 									error = command.executeCommand(save, CurrentLine);
 								}
 								catch (IOException e) {
-									// TODO Auto-generated catch block
+									System.out.println("!!> Oops, There was an error "
+			                                   + "trying to run this command.");
 									e.printStackTrace();
 								}
 							}
 								
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
+							System.out.println("!!> Oops, There was an error "
+	                                   + "trying to run this command.");
 							e.printStackTrace();
 						}					
 					}
@@ -258,41 +265,53 @@ public class Editor implements IEditor {
 				// Exit the editor.
 				case 'x':
 					
-					// Check and see if the document has yet to be saved.
-					if (!saved)
+					if (input.equals("x"))
 					{
-						System.out.println ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-						System.out.println ("  The document has yet to be saved."
-								+ "\n Would you like to save it before you exit?[y/n]");
-						System.out.println ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+						// Check and see if the document has yet to be saved.
+						if (!saved)
+						{
+							System.out.println ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+							System.out.println ("  The document has yet to be saved."
+									+ "\n Would you like to save it before you exit?[y/n]");
+							System.out.println ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+							
+							 BufferedReader inputReader = new BufferedReader (
+							    		new InputStreamReader (System.in) );
+							 
+							 try {
+								String save =  inputReader.readLine();
+								save = save.toLowerCase();
+								if(save.equals("y")){
+									try{
+										System.out.println("\nEnter save command: s <filename>:");
+										save =  inputReader.readLine();
+										command = new SaveFile ();
+										error = command.executeCommand(save, CurrentLine);
+									}
+									catch (IOException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+								}
+									
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}					
+						}
 						
-						 BufferedReader inputReader = new BufferedReader (
-						    		new InputStreamReader (System.in) );
-						 
-						 try {
-							String save =  inputReader.readLine();
-							save = save.toLowerCase();
-							if(save.equals("y")){
-								try{
-									System.out.println("\nEnter save command: s <filename>:");
-									save =  inputReader.readLine();
-									command = new SaveFile ();
-									error = command.executeCommand(save, CurrentLine);
-								}
-								catch (IOException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-							}
-								
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}					
+						System.out.println("Good bye!");
+						exit = true;
 					}
 					
-					System.out.println("Good bye!");
-					exit = true;
+					else
+					{
+						error = true;
+						 System.out.println("Incorrect Input Format. "
+						 		+ "\nShould be of form: [command] "
+						 		+ "[data_entry]");
+						 System.out.print("\n: ");
+					}
 					
 				break;
 				
@@ -300,6 +319,19 @@ public class Editor implements IEditor {
 				case 'e':
 					command = new AfterLast ();
 					command.executeCommand(input, CurrentLine);
+				break;
+				
+				// Cut command.
+				case 'o':
+					Cut cutCommand = new Cut ();
+					cutCommand.executeCommand(input, CurrentLine,
+									clipBoardLine, documentLineCount);
+				break;
+				
+				case 'p':
+					Paste pasteCommand = new Paste();
+					pasteCommand.executeCommand(input, CurrentLine,
+														CurrentLine);
 				break;
 				
 				// Invalid command entered.

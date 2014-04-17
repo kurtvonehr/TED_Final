@@ -76,6 +76,9 @@ public class LoadFile implements ICommand {
 				// Close the file stream.
 				bufferFile.close();
 				
+				// Validates the success of the command.
+				commandSuccess = true;
+				
 			} 
 			
 			// Incorrectly formated command error.
