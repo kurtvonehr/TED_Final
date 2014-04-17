@@ -13,17 +13,39 @@ import java.util.ListIterator;
 
 public class AfterLine implements ICommand {
 
+	//--------------------------------------------------------------//
+	// Function Definitions					     					//
+	//--------------------------------------------------------------//
 
 	@Override
+	/* Executes a file load sequence if required. */
 	public boolean executeCommand(String command, 
-										ListIterator<String> currentData) {
+								ListIterator<String> currentData) {
 		
-		String insertedText = command.substring(1,command.length());
-		if(currentData.hasNext()){
-			currentData.add(insertedText);
-		}
+		// --- Variable Declarations  ---------------------------//
+		
+		/* The text to insert into the document. */
+		String insertedText;
+		
+		// --- Main Routine -------------------------------------//
+		
+		// Print the help command.
+		if (command.equals ("i -h"))
+			printCommandHelp ();
+
+		// Execute the command.
 		else
-			currentData.add(insertedText);
+		{
+			// Extract the content to be added.
+			insertedText = command.substring(1,command.length());
+			
+			// Insert the content in.
+			if(currentData.hasNext())
+				currentData.add(insertedText);
+			
+			else
+				currentData.add(insertedText);
+		}
 		
 		// Return that method completed.
 		return true;

@@ -14,6 +14,7 @@ import java.util.ListIterator;
 public class DisplayAllLines implements ICommand {
 
 	@Override
+	/* Executes a file load sequence if required. */
 	public boolean executeCommand(String command, 
 								 ListIterator<String> currentData) {
 		// TODO Auto-generated method stub

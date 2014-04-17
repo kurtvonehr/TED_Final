@@ -19,6 +19,7 @@ public class BeforeLine implements ICommand {
 	//--------------------------------------------------------------//
 
 	@Override
+	/* Executes a file load sequence if required. */
 	public boolean executeCommand(String command, 
 									ListIterator<String> currentData) {
         
@@ -29,16 +30,23 @@ public class BeforeLine implements ICommand {
 		
 		// --- Main Routine -------------------------------------//
 		
-		// Extract the content to be added.
-		insertedText = command.substring(1,command.length());
+		// Print the help command.
+		if (command.equals ("e -h"))
+			printCommandHelp ();
 		
-		// Insert the content in.
-		if(currentData.hasPrevious()){
-			currentData.previous();
-			currentData.add(insertedText);
+		else 
+		{
+			// Extract the content to be added.
+			insertedText = command.substring(1,command.length());
+			
+			// Insert the content in.
+			if(currentData.hasPrevious()){
+				currentData.previous();
+				currentData.add(insertedText);
+			}
+			else
+				currentData.add(insertedText);
 		}
-		else
-			currentData.add(insertedText);
 		
 		// Return that method completed.
 		return true;
