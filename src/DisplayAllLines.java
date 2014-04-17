@@ -22,45 +22,61 @@ public class DisplayAllLines implements ICommand {
 		String lastLine = ""; 
 		int i = 2;
 		
-		if(command.substring(1,2).equals("on"))
-			error = false;
-		else if(command.substring(1,3).equals("off"))
-			error = true;
+		if(command.equals("d -h"))
+				printCommandHelp();
 		
-		else{
+		if(command.length()>3){
 			
-			while(command.charAt(i) != ' '){
-				firstLine = firstLine + command.charAt(i);
+			if(command.substring(2,4).equals("on"))
+				error = false;
+			else if(command.substring(2,5).equals("off"))
+				error = true;
+			
+			else{
+				
+				while(command.charAt(i) != ' ' && i<command.length()){
+					firstLine = firstLine + command.charAt(i);
+					i++;
+				}
 				i++;
-			}
-			i++;
-			while(command.charAt(i) != ' '){
-				lastLine = lastLine + command.charAt(i);
-				i++;
-			}
+				while(i<command.length()){
+					lastLine = lastLine + command.charAt(i);
+					i++;
+				}
+			
+				int restorecurrentData = 0;
 		
-			int restorecurrentData = currentData.previousIndex();
-	
-			//move iterator to front of list
-			while(currentData.previousIndex() != -1)
-				currentData.previous();
-			
-			i = 0;
-			
-			//Move through entire list and print each string
-			while(currentData.hasNext()){
-				if(i>=Integer.parseInt(firstLine) || i < Integer.parseInt(lastLine))
-					System.out.println("" + (i+1) + "    " + currentData.next());				
-				i++;
+				//move iterator to front of list
+				while(currentData.previousIndex() != -1)
+					currentData.previous();
+				
+				i = 0;
+				
+				if(firstLine.matches("[0-9].*") && lastLine.matches("[0-9].*")){
+					//Move through entire list and print each string
+					while(currentData.hasNext()){
+						if((i+1)>=Integer.parseInt(firstLine) && (i+1) < Integer.parseInt(lastLine))
+							System.out.println("" + (i+1) + "    " + currentData.next());
+						else if((i+1) == Integer.parseInt(lastLine)){
+							System.out.println("" + (i+1) + " => " + currentData.next());
+							restorecurrentData = currentData.previousIndex();
+						}
+						else
+							currentData.next();
+						i++;
+					}
+					
+					//restore current line back to it's previous index
+					while(currentData.previousIndex() != restorecurrentData)
+						currentData.previous();
+					
+					error = true;
+				}
+				else{
+					error = true;
+					System.out.println("Enter valid line numbers");
+				}
 			}
-			
-			if(!currentData.hasNext()){
-				currentData.previous();
-				System.out.println("" + (i+1) + " => " + currentData.next());
-			}
-			
-			
-			return error;
 		}
 		return error;
 			

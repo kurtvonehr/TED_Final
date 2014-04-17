@@ -32,6 +32,9 @@ public class Editor implements IEditor {
 	/* The length in textual lines the document has. */
 	int documentLineCount;
 	
+	//Determines if system should display contents of file
+	boolean displayOff = false;
+	
 	/* If the document has been saved */
 	boolean saved = false;
 	
@@ -150,7 +153,7 @@ public class Editor implements IEditor {
 				case 'd':
 					clearConsole();
 					command = new DisplayAllLines ();
-					command.executeCommand(input, CurrentLine);
+					displayOff = command.executeCommand(input, CurrentLine);
 				break;
 				
 				// Clear and remove all lines in buffer.
@@ -308,6 +311,11 @@ public class Editor implements IEditor {
 					 break;
 			}
 			
+			if(displayOff){
+				error = true;
+				System.out.print(": ");
+			}
+			
 			// Update document flag data.
 			documentLineCount = textData.size();
 			
@@ -318,9 +326,9 @@ public class Editor implements IEditor {
 		
 		// Nothing was entered into the buffer.
 		else{
-			error = true;
- 			System.out.println("Command does not match an existing command, enter 'h' for help. ");
- 			System.out.print("\n: ");
+				error = true;
+	 			System.out.println("Command does not match an existing command, enter 'h' for help. ");
+	 			System.out.print(": ");
 		}
 		
 		return exit;
