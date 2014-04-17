@@ -28,7 +28,7 @@ public class RemoveCurrentLine implements ICommand {
 		int movedLine;
 		
 		/* The boolean flag status for the success of the command. */
-		boolean commandSuccess = false;
+		boolean error = true;
 		
 		/* The text of a given line being pointed to. */
 		String insertedText;
@@ -39,16 +39,20 @@ public class RemoveCurrentLine implements ICommand {
 		if (command.equals ("r -h"))
 		{
 			printCommandHelp ();
-			commandSuccess = true;
+			error = false;
 		}
 	
 		// Remove just this line.
 		else if(command.length() == 1) {
-			if(currentData.hasPrevious() && 
-									currentData.previousIndex() > 0) {
+			if(currentData.hasPrevious()) {
 					currentData.previous(); 
 					currentData.remove();
+					if(currentData.hasNext())
+						currentData.next();
+					error = false;
 			}
+			else if(currentData.previousIndex() == -1)
+				currentData.next();
 		}
 		
 		// Remove a given line based off its authenticity.
@@ -73,7 +77,7 @@ public class RemoveCurrentLine implements ICommand {
 						}
 					}
 					
-					commandSuccess = true;
+					error = false;
 				}
 				
 				catch(NumberFormatException e)
@@ -81,18 +85,21 @@ public class RemoveCurrentLine implements ICommand {
 					System.out.println("!!> Oops, the command"
 							+ " was not formated correctly.\n Type r"
 							+ " -h to get command help.");
+					error = true;
 				}
 			}
 			
-			else
+			else{
 				System.out.println("!!> Oops, the command"
 						+ " was not formated correctly.\n Type r"
 						+ " -h to get command help.");
+				error = true;
+			}
 			
 		}
 		
 		// Return that method completed.
-		return commandSuccess;
+		return error;
 		
 	}
 	

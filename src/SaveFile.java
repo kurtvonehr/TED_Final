@@ -40,7 +40,7 @@ public class SaveFile implements ICommand {
 		PrintWriter fileWrite;
 		
 		/* Whether or not the command was successful. */
-		boolean commandSuccess = false;
+		boolean error = true;
 		
 		// --- Main Routine -------------------------------------//
 		
@@ -48,7 +48,7 @@ public class SaveFile implements ICommand {
 		if (command.equals ("s -h"))
 		{
 			printCommandHelp ();
-			commandSuccess = true;
+			error = false;
 		}
 		
 		// Process the file in.
@@ -73,6 +73,8 @@ public class SaveFile implements ICommand {
 				
 				// Close the file stream.
 				fileWrite.close();
+				
+				error = false;
 			}
 			
 			// Incorrectly formated command error.
@@ -80,27 +82,19 @@ public class SaveFile implements ICommand {
 				System.out.println("!!> Oops, the command"
                    + " was not formated correctly.\n Type s -h to get "
                    + "command help.");
-				e.printStackTrace();
-			}
-			
-			// File not found error.
-			catch (FileNotFoundException e) {
-				System.out.println("!!> Oops, The file you entered "
-                                   + "was not \nable to be created. Please make "
-                                   + "sure the file exists. ");
-				e.printStackTrace();
+				error = true;
 			}
 			
 			// Corrupt file stream error.
 			catch (IOException e) {
 				System.out.println("!!> Oops, There was an error "
                                    + "trying to write to the file you entered.");
-				e.printStackTrace();
+				error = true;
 			}
 		}
 		
 		// Return the result of the file operation.
-		return commandSuccess;
+		return error;
 		
 	}
 	

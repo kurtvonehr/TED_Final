@@ -29,16 +29,16 @@ public class ClearLines implements ICommand {
 		{
 			// Loop through and remove lines.
 			while(currentData.hasNext())
-				currentData.remove();
-			
-			while(currentData.previousIndex() > 0)
-				currentData.remove();
-			
-			if(currentData.hasPrevious()){
+				 currentData.remove();
+			while(currentData.previousIndex() > 0){
 				currentData.previous();
-				currentData.remove();
+				if(currentData.next() != null)
+					currentData.remove();
 			}
+				 currentData.previous();
+				 currentData.remove();
 		}
+		
 		
 		// Return that method completed.
 		return true;

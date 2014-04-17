@@ -62,6 +62,7 @@ public class DisplayAllLines implements ICommand {
 			
 			return error;
 		}
+		return error;
 			
 	}
 	

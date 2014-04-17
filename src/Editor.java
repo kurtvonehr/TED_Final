@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -28,6 +31,9 @@ public class Editor implements IEditor {
 	
 	/* The length in textual lines the document has. */
 	int documentLineCount;
+	
+	/* If the document has been saved */
+	boolean saved = false;
 	
 	/* linked list containing each line of the document. */
 	LinkedList <String> textData;	
@@ -109,12 +115,14 @@ public class Editor implements IEditor {
 			
 				// Insert before current line.
 				case 'b':
+				saved = false;
 				command = new BeforeLine();
 				command.executeCommand(input, CurrentLine);
 				break;
 				
 				// Insert after current line.
 				case 'i':
+					saved = false;
 					command = new AfterLine();
 					command.executeCommand(input, CurrentLine);
 				break;
@@ -133,6 +141,7 @@ public class Editor implements IEditor {
 			
 				// Remove the current line.
 				case 'r':
+					saved = false;
 					command = new RemoveCurrentLine ();
 					command.executeCommand(input, CurrentLine);
 				break;
@@ -146,23 +155,94 @@ public class Editor implements IEditor {
 				
 				// Clear and remove all lines in buffer.
 				case 'c':
+					
+					if (!saved)
+					{
+						System.out.println ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+						System.out.println ("  The document has yet to be saved."
+								+ "\n Would you like to save it before you exit?[y/n]");
+						System.out.println ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+						
+						 BufferedReader inputReader = new BufferedReader (
+						    		new InputStreamReader (System.in) );
+						 
+						 try {
+							String save =  inputReader.readLine();
+							save = save.toLowerCase();
+							if(save.equals("y")){
+								try{
+									System.out.println("\nEnter save command: s <filename>:");
+									save =  inputReader.readLine();
+									command = new SaveFile ();
+									error = command.executeCommand(save, CurrentLine);
+								}
+								catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+								
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}					
+					}
+					
+					saved = false;
 					command = new ClearLines ();
 					command.executeCommand(input, CurrentLine);
+					
 				break;
 				
 				// Save file contents to a file directory.
 				case 's':
 					command = new SaveFile ();
-					docChange = command.executeCommand(input, 
-									CurrentLine) ? false : true;
+					error = command.executeCommand(input, CurrentLine);
+					saved = true;
 				break;
 			
 				// Load a files contents from a directory.
 				case 'l':
-					command = new ClearLines ();
-					command.executeCommand(input, CurrentLine);
-					command = new LoadFile ();
-					command.executeCommand(input, CurrentLine);
+					
+					if (!saved)
+					{
+						System.out.println ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+						System.out.println ("  The document has yet to be saved."
+								+ "\n Would you like to save it before you exit?[y/n]");
+						System.out.println ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+						
+						 BufferedReader inputReader = new BufferedReader (
+						    		new InputStreamReader (System.in) );
+						 
+						 try {
+							String save =  inputReader.readLine();
+							save = save.toLowerCase();
+							if(save.equals("y")){
+								try{
+									System.out.println("\nEnter save command: s <filename>:");
+									save =  inputReader.readLine();
+									command = new SaveFile ();
+									error = command.executeCommand(save, CurrentLine);	
+								}
+								catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+									error = true;
+								}
+							}
+								
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							error = true;
+						}					
+					}
+					
+						command = new ClearLines ();
+						command.executeCommand(input, CurrentLine);
+						command = new LoadFile ();
+						error = command.executeCommand(input, CurrentLine);
+						
 				break;
 				
 				// Display list of commands.
@@ -176,22 +256,39 @@ public class Editor implements IEditor {
 				case 'x':
 					
 					// Check and see if the document has yet to be saved.
-					if (docChange)
+					if (!saved)
 					{
 						System.out.println ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 						System.out.println ("  The document has yet to be saved."
-								+ "\n Would you like to save it before you exit?");
+								+ "\n Would you like to save it before you exit?[y/n]");
 						System.out.println ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 						
-						//TODO ADD USER PROMPT FOR RESULT
-						
+						 BufferedReader inputReader = new BufferedReader (
+						    		new InputStreamReader (System.in) );
+						 
+						 try {
+							String save =  inputReader.readLine();
+							save = save.toLowerCase();
+							if(save.equals("y")){
+								try{
+									System.out.println("\nEnter save command: s <filename>:");
+									save =  inputReader.readLine();
+									command = new SaveFile ();
+									error = command.executeCommand(save, CurrentLine);
+								}
+								catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+								
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}					
 					}
 					
-					else
-					{
-						System.out.println("Good bye!");
-					}
-					
+					System.out.println("Good bye!");
 					exit = true;
 					
 				break;
