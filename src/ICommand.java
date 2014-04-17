@@ -10,13 +10,7 @@ import java.util.ListIterator;
 *---------------------------------------------------------------------*
 * Project: Project 4 : TED	 	                                      *
 * Author : McKim A. Jacob, Vonehr Kurt						          *
-* Date Of Creation: 4 - 6 - 2014                                      *
-*---------------------------------------------------------------------*
-* ISSUES AND NOTES						      						  *	                                      
-*---------------------------------------------------------------------*
-* 
-*                                 
-*                                 
+* Date Of Creation: 4 - 6 - 2014                                      *                              
 *---------------------------------------------------------------------*/
 
 public interface ICommand {
@@ -26,7 +20,8 @@ public interface ICommand {
 	//--------------------------------------------------------------// 
 	
 	/* Called to execute the command*/
-	public boolean executeCommand (String command, ListIterator<String> currentData);
+	public boolean executeCommand (String command, 
+									ListIterator<String> currentData);
 	
 	/* This is called when the user asks for a command help list. */
 	public void printCommandHelp ();

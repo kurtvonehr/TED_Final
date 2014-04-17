@@ -9,12 +9,6 @@ import java.util.ListIterator;
  * Project: Project 4 : TED	 	                                       *
  * Author : McKim A. Jacob, Vonehr Kurt						           *
  * Date Of Creation: 4 - 6 - 2014                                      *
- *---------------------------------------------------------------------*
- * ISSUES AND NOTES						      						   *
- *---------------------------------------------------------------------*
- *
- *
- *
  *---------------------------------------------------------------------*/
 
 public class RemoveCurrentLine implements ICommand {
@@ -25,49 +19,99 @@ public class RemoveCurrentLine implements ICommand {
 
 	@Override
 	/* Executes a file load sequence if required. */
-	public boolean executeCommand(String command, ListIterator<String> currentData) {
+	public boolean executeCommand(String command, 
+								ListIterator<String> currentData) {
 		
+        // --- Variable Declarations  ---------------------------//
+		
+		/* The numerical line pointer for the remove operation. */
 		int movedLine;
-		boolean error = false;
+		
+		/* The boolean flag status for the success of the command. */
+		boolean commandSuccess = false;
+		
+		/* The text of a given line being pointed to. */
 		String insertedText;
+		
+		// --- Main Routine -------------------------------------//
+		
+		// Print the help command.
+		if (command.equals ("r -h"))
+		{
+			printCommandHelp ();
+			commandSuccess = true;
+		}
 	
-		if(command.length() == 1){
-			if(currentData.hasPrevious() && currentData.previousIndex() > 0){
-					currentData.previous();
+		// Remove just this line.
+		else if(command.length() == 1) {
+			if(currentData.hasPrevious() && 
+									currentData.previousIndex() > 0) {
+					currentData.previous(); 
 					currentData.remove();
 			}
 		}
-		else{
+		
+		// Remove a given line based off its authenticity.
+		else
+		{
+			
 			insertedText = command.substring(2,command.length());
-			if(insertedText.matches("[0-9].*")){
-				try{
+			
+			// Error Check the input.
+			if(insertedText.matches("[0-9].*"))
+			{
+				
+				try {
 					movedLine = Integer.parseInt(insertedText);
+					
 					for(int i = 0; i < movedLine; i++)
-						if(currentData.hasPrevious() && currentData.previousIndex() > 0){
+					{
+						if(currentData.hasPrevious() && 
+									currentData.previousIndex() > 0) {
 							currentData.previous();
 							currentData.remove();
 						}
+					}
+					
+					commandSuccess = true;
 				}
-				catch(NumberFormatException e){
-					System.out.println("Please enter a valid number");
-					error = true;
+				
+				catch(NumberFormatException e)
+				{
+					System.out.println("!!> Oops, the command"
+							+ " was not formated correctly.\n Type r"
+							+ " -h to get command help.");
 				}
 			}
-			else{
-				System.out.println("Please enter a valid number");
-				error = true;
-			}
+			
+			else
+				System.out.println("!!> Oops, the command"
+						+ " was not formated correctly.\n Type r"
+						+ " -h to get command help.");
+			
 		}
+		
 		// Return that method completed.
-		return error;
+		return commandSuccess;
 		
 	}
 	
+	//--------------------------------------------------------------//
 	
 	@Override
 	/* Prints out command help information. */
 	public void printCommandHelp() {
-		// TODO PRINT COMMAND HELP
+		
+		System.out.println("------------------------------------------");
+		System.out.println("r - Remove Current Line");
+		System.out.println("------------------------------------------");
+		System.out.println("Desc - Can either remove the current line");
+		System.out.println("being edited or a specific line provided");
+		System.out.println("a legitimate numeric line value.");
+		System.out.println("Example commands : \n\n To Remove Current:");
+		System.out.println("r \n\n To Remove Specific line :");
+		System.out.println("r ");
+		System.out.println("------------------------------------------");
 
 	}
 

@@ -9,12 +9,6 @@ import java.util.ListIterator;
  * Project: Project 4 : TED	 	                                       *
  * Author : McKim A. Jacob, Vonehr Kurt						           *
  * Date Of Creation: 4 - 6 - 2014                                      *
- *---------------------------------------------------------------------*
- * ISSUES AND NOTES						      						   *
- *---------------------------------------------------------------------*
- *
- *
- *
  *---------------------------------------------------------------------*/
 
 public class DisplayAllLines implements ICommand {
